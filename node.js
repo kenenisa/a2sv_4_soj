@@ -35,13 +35,12 @@ function scrape(file, contestI) {
     return { problems, people }
 }
 
-const result = [];
+let result = [];
 for (let i = 1; i <= 9; i++) {
     let con = scrape(`txt/contest#${i}.txt`, i)
     con.contest = i
     result.push(con)
 }
-
 function findKid(name) {
     const r = []
     const s = []
@@ -56,5 +55,20 @@ const kids = []
 names.forEach(name => {
     kids.push(findKid(name))
 })
-fs.writeFileSync("result.json", JSON.stringify({ raw: result, kids }))
+var g47 = ['epix','p4ndish','super3codes','nabroleonx','Simon_Ghiwot','ebdollasign','J0RdN','mafilala','yonaries','kenenisa','abudah29','Bura_B','ahmedin','se348']
+result = result.map(e=>{
+    e.people = e.people.filter(val=>g47.find(b=>b==val.name))
+    return e
+}).map(e=>{
+    e.people = e.people.sort((a,b)=>a.rank-b.rank).map((val,i)=>{
+        val.rank = i+1
+        return val
+    })
+    return e
+})
+const g47Members = []
+g47.forEach(name=>{
+    g47Members.push(findKid(name))
+})
+fs.writeFileSync("result.json", JSON.stringify({ raw: result, kids,g47Members }))
 console.log(result);
