@@ -36,7 +36,7 @@ function scrape(file, contestI) {
 }
 
 let result = [];
-for (let i = 1; i <= 11; i++) {
+for (let i = 1; i <= 12; i++) {
     let con = scrape(`txt/contest#${i}.txt`, i)
     con.contest = i
     result.push(con)
