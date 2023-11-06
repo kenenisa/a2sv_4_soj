@@ -12,12 +12,11 @@
 <body>
     <h1>A2SV remote contests</h1>
     <button id="changeType">Switch to All or G47</button>
-    <hr>
     <canvas id="canvas" width="2300" height="6550">
     </canvas>
-    <script src="./data.js"></script>
+    <script src="./datav1.js"></script>
     <script>
-        
+
         var cv = document.getElementById("canvas");
         var ctx = cv.getContext("2d");
         ctx.font = "21px Arial";
@@ -76,10 +75,14 @@
         // }
         ctx.setLineDash([0]);
         ctx.lineWidth = 5;
+        var kids = rankings.g47Members;
         var circleRadius = 18;
         var horizontalSpace = 125;
         var verticalSpace = 50;
-        var seasons = 17;
+        var seasons = kids[0].r.length;
+        cv.width = seasons * horizontalSpace + 200
+        cv.height = kids.length * verticalSpace + 50
+        console.log(kids);
         var lineThickness = 5;
         var circleStrokeThickness = 6;
         var leftOffset = 50;
@@ -104,7 +107,7 @@
         //     { r: [2, 2, 4, 1, 2, 4], c: "blue",n:"mhret" },
         //     { r: [1, 3], c: "indigo",n:"bro" },
         // ];
-        var kids = rankings.g47Members;
+
 
         var circleCollections = []
         function circle(x, y, s, name) {
@@ -138,7 +141,7 @@
                 ctx.setLineDash([5, 3]);/*dashes are 5px and spaces are 3px*/
                 ctx.beginPath();
                 ctx.font = "16px Arial";
-                ctx.fillStyle ="#eee"
+                ctx.fillStyle = "#eee"
                 ctx.fillText("#" + (i + 1), leftOffset - 10 + i * horizontalSpace, 15);
                 ctx.moveTo(leftOffset + i * horizontalSpace, 20);
                 ctx.lineTo(leftOffset + i * horizontalSpace, 1000);
@@ -201,13 +204,13 @@
             }
             draw(focus)
         })
-        document.querySelector('#changeType').addEventListener("click",(ev)=>{
-            console.log(ev);
-            if(kids == rankings.g47Members){
+        document.querySelector('#changeType').addEventListener("click", (ev) => {
+            if (kids == rankings.g47Members) {
                 kids = rankings.kids
-            }else{
+            } else {
                 kids = rankings.g47Members
             }
+            cv.height = kids.length * verticalSpace
             draw(false)
         })
         // for (let rows = 0; rows < seasons; rows++) {
@@ -219,3 +222,5 @@
 </body>
 
 </html>
+
+

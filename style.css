@@ -1,7 +1,12 @@
 body {
-    margin:0;
+    margin: 0;
     background: #3a3a3a;
     background: #181e2a;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color:white;
+    color: white;
+}
+
+canvas {
+    border-top: 1px solid #ddd;
+    padding-top: 1rem;
 }
